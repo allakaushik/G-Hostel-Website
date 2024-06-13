@@ -1,0 +1,65 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: rgb(41, 41, 141);
+    color: #fff;
+    text-align: center;
+    padding: 0;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.pizza-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 15px;
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+.price {
+    color: #e44d26;
+    font-weight: bold;
+}
+
+.hello {
+    color: #ccc;
+}
+
+.logo {
+    display: flex;
+    height: 100px;
+}
+
+#heading {
+    text-align: center;
+}
+
+
+.two {
+    margin-bottom: 0;
+}
+
+.one {
+    margin-bottom: 0;
+}

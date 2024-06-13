@@ -1,0 +1,35 @@
+body {
+    background-color:white!important;
+    color: white; 
+}
+/* rgb(9, 9, 73) */
+.one {
+    border-radius: 3%;
+    padding: 3%;
+    background-color: #981f2b;
+    max-width: 65%; 
+    margin: auto; 
+    margin-top: 20px; 
+}
+
+h2 {
+    text-align: center; 
+}
+
+form {
+    text-align: left; 
+}
+.o, .t, section, .th, .fo {
+    display: flex;
+    justify-content: space-around;
+}
+form input {
+    max-width: fit-content;
+    box-sizing: border-box;
+    margin-top: 5px; 
+}
+.docu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

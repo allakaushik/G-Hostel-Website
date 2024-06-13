@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-container select,
+        .input-container input {
+            width: 100%;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+        }
+
+        .time-slot {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .time-slot.booked {
+            background-color: red;
+            color: white;
+        }
+
+        .time-slot.available {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <center><h1>Laundry Booking</h1></center>
+        <div class="input-container">
+            <label for="hostel">Select a hostel:</label>
+            <select id="hostel">
+                <option value="">--Select a hostel--</option>
+                <option value="hostel1">vinay sadan</option>
+                <option value="hostel2">Ravindra Sadan</option>
+                <option value="hostel3">Shanti Sadan</option>
+                <option value="hostel4">Durgabhai Deshmukh Sadan</option>
+                <option value="hostel5">Aditya Sadan</option>
+                <option value="hostel6">Avanthika Sadan</option>
+                <option value="hostel7">Kokila Sadan</option>
+            </select>
+        </div>
+        <div class="input-container">
+            <label for="date">Select a date:</label>
+            <input type="date" id="date">
+        </div>
+        <div class="time-slots" id="time-slots"></div>
+    </div>
+    <script>
+        const hostelSelect = document.getElementById('hostel');
+        const dateInput = document.getElementById('date');
+        const timeSlotsDiv = document.getElementById('time-slots');
+        const bookedSlots = new Map(); // Using a Map to store booked slots for each day
+
+        function updateTimeSlots() {
+            const selectedDate = new Date(dateInput.value);
+            const currentDate = new Date();
+            const isToday = selectedDate.toDateString() === currentDate.toDateString();
+
+            // Check if both hostel and date are selected
+            if (hostelSelect.value && dateInput.value) {
+                timeSlotsDiv.innerHTML = ''; // Clear previous slots
+                const isDayBooked = Array.from(bookedSlots).some(slot => slot.includes(dateInput.value));
+
+                for (let hour = 8; hour <= 21; hour++) {
+                    const timeSlot = document.createElement('div');
+                    timeSlot.classList.add('time-slot');
+                    timeSlot.textContent = `${hour}:00 - ${hour + 1}:00`;
+
+                    if (isToday && hour < currentDate.getHours()) {
+                        timeSlot.classList.add('booked');
+                    } else {
+                        const slotIdentifier = `${hostelSelect.value}-${dateInput.value}-${hour}`;
+                        const daySlotIdentifier = `${hostelSelect.value}-${dateInput.value}`;
+                        // Check if the day is already booked
+                        if (!isDayBooked) {
+                            // Check if the time slot is available (considering a max limit of 15 registrations)
+                            if (!bookedSlots.has(daySlotIdentifier) && !bookedSlots.has(slotIdentifier) && bookedSlots.size < 15) {
+                                timeSlot.classList.add('available');
+                                timeSlot.addEventListener('click', () => {
+                                    bookedSlots.set(daySlotIdentifier, true);
+                                    bookedSlots.set(slotIdentifier, true);
+                                    timeSlot.classList.remove('available');
+                                    timeSlot.classList.add('booked');
+                                    alert(`Time slot booked: ${timeSlot.textContent}`);
+                                });
+                            } else {
+                                timeSlot.classList.add('booked');
+                                timeSlot.addEventListener('click', () => {
+                                    alert(`You can book another slot for the following day.`);
+                                });
+                            }
+                        } else {
+                            timeSlot.classList.add('booked');
+                            timeSlot.addEventListener('click', () => {
+                                alert(`You can book another slot for the following day.`);
+                            });
+                        }
+                    }
+
+                    timeSlotsDiv.appendChild(timeSlot);
+                }
+            }
+        }
+
+        dateInput.addEventListener('input', updateTimeSlots);
+        hostelSelect.addEventListener('change', updateTimeSlots);
+    </script>
+</body>
+
+</html>
+

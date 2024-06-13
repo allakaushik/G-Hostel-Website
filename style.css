@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+    
+.one{
+    background-color: white;
+    width: 50%;
+}
+
+.two{
+    background-color: #981f2b;
+    width:50%;
+}
+
+.carousel-item img{
+    object-fit: cover;
+    height: 100vh;
+}
+
+.two{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+h1{
+    text-align: center;
+    color: white;
+    margin-top: 7%;
+}
+p{
+    text-align: center;
+    color: white;
+    margin-top: 2%;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+button{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.lo{
+    margin:0 2%;
+}
